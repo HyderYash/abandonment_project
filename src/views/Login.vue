@@ -51,6 +51,8 @@
   </v-main>
 </template>
 <script>
+import APIService from "../services/APIService";
+const api = new APIService();
 export default {
   name: "Login",
   data() {
@@ -60,12 +62,9 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
-      const formData = {
-        USER_NAME: this.username,
-        USER_PASSWORD: this.password,
-      };
-      console.log(formData);
+    async handleSubmit() {
+      const login = await api.loginIntoApp(this.username, this.password);
+      console.log(login);
       this.$router.push("/dashboard");
     },
   },
